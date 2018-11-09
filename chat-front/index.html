@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/header.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="font_icon/iconfont.css">
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			mui.plusReady(function() {
+				plus.na.setStatusBarStyle("light")
+				plus.navigator.setStatusBarBackground("#242424")
+			});
+		</script>
+	</head>
+	<body>
+
+		<header class="mui-bar mui-bar-nav header-title">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title title-clore">标题</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" tabindex="0">
+				<span class="mui-icon mui-icon-chatbubble"></span>
+				<span class="mui-tab-label">微信</span>
+			</a>
+			<a class="mui-tab-item" tabindex="1">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">通讯录</span>
+			</a>
+			<a class="mui-tab-item" tabindex="2">
+				<span class="mui-icon iconfont icon-zhinanzhen1"></span>
+				<span class="mui-tab-label">发现</span>
+			</a>
+			<a class="mui-tab-item" tabindex="3">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我</span>
+			</a>
+		</nav>
+
+		<script type="text/javascript" charset="utf-8">
+			var imoocArray = [
+
+				{
+					pageId: "imooc-chatlist.html",
+					pageUrl: "imooc-chatlist.html"
+				},
+				{
+					pageId: "imooc-contcat.html",
+					pageUrl: "imooc-contcat.html"
+				},
+
+				{
+					pageId: "imooc-discover.html",
+					pageUrl: "imooc-discover.html"
+				},
+
+				{
+					pageId: "imooc-me.html",
+					pageUrl: "imooc-me.html"
+				}
+			];
+			//添加子页面的样式
+			var imoocStyle = {
+				top: "44px",
+				bottom: "50px"
+			}
+
+
+			mui.plusReady(function() {
+						var indexWebview = plus.webview.currentWebview();
+						//向当前主页webview追加子页面的4张webview对象
+						for (var i = 0; i < imoocArray.length; i++) {
+							var imoocPage = plus.webview.create(imoocArray[i].pageUrl,
+								imoocArray[i].pageId, imoocStyle);
+							//隐藏webview窗口
+							imoocPage.hide();
+							//追加子页面到当前主页面
+							indexWebview.append(imoocPage);
+						}
+						plus.webview.show(imoocArray[0].pageId);
+
+						//批量绑定tab事件,展示不同的页面
+						mui(".mui-bar-tab").on("tap", "a", function() {
+							var tabindex = this.getAttribute("tabindex");
+							//显示点击的tab选项对应的页面
+							plus.webview.show(imoocArray[tabindex].pageId, "fade-in", 200);
+
+							for (var i = 0; i < imoocArray.length; i++) {
+								if (i != tabindex) {
+									//隐藏其他不需要的页面
+									plus.webview.hide(imoocArray[i].pageId, "fade-out);
+									}
+								});
+						})
+		</script>
+	</body>
+</html>
