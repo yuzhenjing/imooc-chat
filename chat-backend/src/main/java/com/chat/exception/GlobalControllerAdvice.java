@@ -36,7 +36,7 @@ public class GlobalControllerAdvice {
     }
 
     /**
-     * 拦截捕捉自定义异常 MyException.class
+     * 拦截捕捉自定义异常 BusinessException.class
      *
      * @param ex
      * @return
