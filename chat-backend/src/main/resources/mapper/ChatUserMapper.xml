@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chat.mapper.ChatUserMapper">
+  <resultMap id="BaseResultMap" type="com.chat.pojo.ChatUser">
+    <constructor>
+      <idArg column="id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="face_image" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="face_image_big" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="nick_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="qrcode" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="cid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, password, face_image, face_image_big, nick_name, qrcode, cid, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from chat_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="findUserByUserNameAndPassword" resultType="com.chat.pojo.ChatUser">
+      select
+      <include refid="Base_Column_List"/>
+      from chat_user
+      <where>
+          username = #{username}
+          <if test="password != null">
+              and password = #{password}
+          </if>
+      </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from chat_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.chat.pojo.ChatUser">
+    insert into chat_user (id, username, password, 
+      face_image, face_image_big, nick_name, 
+      qrcode, cid, create_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{faceImage,jdbcType=VARCHAR}, #{faceImageBig,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{qrcode,jdbcType=VARCHAR}, #{cid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chat.pojo.ChatUser">
+    insert into chat_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="faceImage != null">
+        face_image,
+      </if>
+      <if test="faceImageBig != null">
+        face_image_big,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="qrcode != null">
+        qrcode,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="faceImage != null">
+        #{faceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="faceImageBig != null">
+        #{faceImageBig,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcode != null">
+        #{qrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chat.pojo.ChatUser">
+    update chat_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="faceImage != null">
+        face_image = #{faceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="faceImageBig != null">
+        face_image_big = #{faceImageBig,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcode != null">
+        qrcode = #{qrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chat.pojo.ChatUser">
+    update chat_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      face_image = #{faceImage,jdbcType=VARCHAR},
+      face_image_big = #{faceImageBig,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      qrcode = #{qrcode,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

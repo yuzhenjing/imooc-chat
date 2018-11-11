@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chat.mapper.FriendsRequestMapper" >
+  <resultMap id="BaseResultMap" type="com.chat.pojo.FriendsRequest" >
+    <constructor >
+      <idArg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="send_user_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="send_date_time" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="accept_user_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="request_date_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="request_msg" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, send_user_id, send_date_time, accept_user_id, request_date_time, request_msg
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from friends_request
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from friends_request
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.chat.pojo.FriendsRequest" >
+    insert into friends_request (id, send_user_id, send_date_time, 
+      accept_user_id, request_date_time, request_msg
+      )
+    values (#{id,jdbcType=VARCHAR}, #{sendUserId,jdbcType=VARCHAR}, #{sendDateTime,jdbcType=VARCHAR}, 
+      #{acceptUserId,jdbcType=VARCHAR}, #{requestDateTime,jdbcType=TIMESTAMP}, #{requestMsg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chat.pojo.FriendsRequest" >
+    insert into friends_request
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sendUserId != null" >
+        send_user_id,
+      </if>
+      <if test="sendDateTime != null" >
+        send_date_time,
+      </if>
+      <if test="acceptUserId != null" >
+        accept_user_id,
+      </if>
+      <if test="requestDateTime != null" >
+        request_date_time,
+      </if>
+      <if test="requestMsg != null" >
+        request_msg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sendUserId != null" >
+        #{sendUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendDateTime != null" >
+        #{sendDateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptUserId != null" >
+        #{acceptUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="requestDateTime != null" >
+        #{requestDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestMsg != null" >
+        #{requestMsg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chat.pojo.FriendsRequest" >
+    update friends_request
+    <set >
+      <if test="sendUserId != null" >
+        send_user_id = #{sendUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendDateTime != null" >
+        send_date_time = #{sendDateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptUserId != null" >
+        accept_user_id = #{acceptUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="requestDateTime != null" >
+        request_date_time = #{requestDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestMsg != null" >
+        request_msg = #{requestMsg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chat.pojo.FriendsRequest" >
+    update friends_request
+    set send_user_id = #{sendUserId,jdbcType=VARCHAR},
+      send_date_time = #{sendDateTime,jdbcType=VARCHAR},
+      accept_user_id = #{acceptUserId,jdbcType=VARCHAR},
+      request_date_time = #{requestDateTime,jdbcType=TIMESTAMP},
+      request_msg = #{requestMsg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

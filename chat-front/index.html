@@ -11,17 +11,15 @@
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 			mui.plusReady(function() {
-				plus.na.setStatusBarStyle("light")
+				plus.navigator.setStatusBarStyle("light");
 				plus.navigator.setStatusBarBackground("#242424")
 			});
 		</script>
 	</head>
 	<body>
-
-		<header class="mui-bar mui-bar-nav header-title">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title title-clore">标题</h1>
-		</header>
+<header class="mui-bar mui-bar-nav header-title">
+    <h1 class="mui-title title-clore">微信</h1>
+</header>m
 		<nav class="mui-bar mui-bar-tab">
 			<a class="mui-tab-item mui-active" tabindex="0">
 				<span class="mui-icon mui-icon-chatbubble"></span>
@@ -49,8 +47,8 @@
 					pageUrl: "imooc-chatlist.html"
 				},
 				{
-					pageId: "imooc-contcat.html",
-					pageUrl: "imooc-contcat.html"
+					pageId: "imooc-contact.html",
+					pageUrl: "imooc-contact.html"
 				},
 
 				{
@@ -92,9 +90,10 @@
 							for (var i = 0; i < imoocArray.length; i++) {
 								if (i != tabindex) {
 									//隐藏其他不需要的页面
-									plus.webview.hide(imoocArray[i].pageId, "fade-out);
+									plus.webview.hide(imoocArray[i].pageId, "fade-out");
 									}
-								});
+								}
+						})
 						})
 		</script>
 	</body>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chat.mapper.MyFriendsMapper" >
+  <resultMap id="BaseResultMap" type="com.chat.pojo.MyFriends" >
+    <constructor >
+      <idArg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="my_user_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="friends_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, my_user_id, friends_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from my_friends
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from my_friends
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.chat.pojo.MyFriends" >
+    insert into my_friends (id, my_user_id, friends_id, 
+      create_time)
+    values (#{id,jdbcType=VARCHAR}, #{myUserId,jdbcType=VARCHAR}, #{friendsId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chat.pojo.MyFriends" >
+    insert into my_friends
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="myUserId != null" >
+        my_user_id,
+      </if>
+      <if test="friendsId != null" >
+        friends_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="myUserId != null" >
+        #{myUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="friendsId != null" >
+        #{friendsId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chat.pojo.MyFriends" >
+    update my_friends
+    <set >
+      <if test="myUserId != null" >
+        my_user_id = #{myUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="friendsId != null" >
+        friends_id = #{friendsId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chat.pojo.MyFriends" >
+    update my_friends
+    set my_user_id = #{myUserId,jdbcType=VARCHAR},
+      friends_id = #{friendsId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
