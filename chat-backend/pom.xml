@@ -34,6 +34,17 @@
             <artifactId>netty-all</artifactId>
             <version>4.1.31.Final</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/cn.bestwu/fastdfs-client-java -->
+        <dependency>
+            <groupId>cn.bestwu</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+            <version>1.27</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
