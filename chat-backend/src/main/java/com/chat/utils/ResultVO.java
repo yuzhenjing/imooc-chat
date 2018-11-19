@@ -21,6 +21,9 @@ public class ResultVO<T> {
     public static ResultVO ok() {
         return new ResultVO<>("SUCCESS", "成功", null);
     }
+    public static ResultVO build(Object o) {
+        return new ResultVO<>("SUCCESS", "成功", o);
+    }
 
     public ResultVO(String code, String msg) {
         this.code = code;

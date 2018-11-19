@@ -46,4 +46,10 @@ public class UserServiceImpl implements UserService {
     public ChatUser findUserByUserNameAndPassword(String username, String password) {
         return userMapper.findUserByUserNameAndPassword(username, password);
     }
+
+    @Override
+    public ChatUser updateUserInfo(ChatUser user) {
+
+        return null;
+    }
 }

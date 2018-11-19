@@ -25,8 +25,8 @@
                      src="image/timg.jpg">
                 <img class="mui-media-object mui-pull-right" style="max-width: 20px; max-height: 20px; margin:12px;"
                      src="image/qrcode.png">
-                <span style="font-size: 4px;" id="span_nickname">小二郎</span></br>
-                <span style="font-size: 4px;" id="span_username">微信号：yzjvx733</span>
+                <span id="span_nickname" style="font-size: 14px;" id="span_nickname">小二郎</span></br>
+                <span id="span_username" style="font-size: 14px;" id="span_username">微信号：yzjvx733</span>
 
             </a>
         </li>
@@ -116,7 +116,7 @@
 
             if (user != null) {
                 var faceImage = user.faceImage;
-                var nickname = user.nickname;
+                var nickname = user.nickName;
                 var username = user.username;
 
                 var span_nickname = document.getElementById("span_nickname");
@@ -131,6 +131,7 @@
                 }
             }
         }
+		})
 </script>
 </body>
 

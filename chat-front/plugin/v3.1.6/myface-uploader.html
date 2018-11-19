@@ -30,8 +30,8 @@
 	<body>
 		
 		<header class="mui-bar mui-bar-nav title" style="position: fixed;">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
-			<a id="cutter" class="mui-pull-right" style="font-size: 15px;color: white;line-height: 40px;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #000000;"></a>
+			<a id="cutter" class="mui-pull-right" style="font-size: 15px;color: #000000;line-height: 40px;">
 				<img src="../../image/upload.png" width="20px"/>
 			</a>
 			<h1 class="mui-title title-color"><b id="chatting-nickname">个人头像</b></h1>
@@ -88,7 +88,7 @@
 						// 上传头像
 						var user = app.getUserGlobalInfo();
 						// 与后端联调
-						mui.ajax(app.serverUrl + "/u/uploadFaceBase64",{
+						mui.ajax(app.serverUrl + "/user/uploadFaceBase64",{
 							data:{
 								userId:user.id,
 								faceData:base64Url

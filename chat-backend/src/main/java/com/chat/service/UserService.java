@@ -49,4 +49,11 @@ public interface UserService {
      * @return
      */
     ChatUser findUserByUserNameAndPassword(String username, String password);
+
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    ChatUser updateUserInfo(ChatUser user);
 }

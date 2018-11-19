@@ -13,7 +13,7 @@ window.app = {
 	/**
 	 * 图片服务器的url地址
 	 */
-	imgServerUrl: 'http://192.168.1.70:88/imooc/',
+	imgServerUrl: 'http://47.99.195.211/group1/',
 	
 	/**
 	 * 判断字符串是否为空
