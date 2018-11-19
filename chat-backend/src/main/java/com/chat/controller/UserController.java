@@ -4,6 +4,8 @@ import com.chat.form.ChatUserForm;
 import com.chat.pojo.ChatUser;
 import com.chat.service.UserService;
 import com.chat.utils.ResultVO;
+import com.chat.utils.idworker.Id;
+import com.chat.utils.idworker.Sid;
 import com.fasterxml.jackson.databind.util.BeanUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -35,7 +37,7 @@ public class UserController {
         if (chatUser == null) {
             chatUser = new ChatUser();
             BeanUtils.copyProperties(chatUserFrom, chatUser);
-            chatUser.setId(UUID.randomUUID().toString());
+            chatUser.setId(Sid.nextShort());
             chatUser.setNickName(chatUser.getUsername());
             chatUser.setCreateTime(new Date());
             userService.addChatUser(chatUser);
@@ -45,6 +47,4 @@ public class UserController {
         }
         return ResultVO.ok();
     }
-
-
 }
