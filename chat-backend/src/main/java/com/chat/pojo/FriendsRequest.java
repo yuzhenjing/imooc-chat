@@ -13,11 +13,11 @@ public class FriendsRequest {
 
     private String sendUserId;
 
-    private String sendDateTime;
+    private Date sendDateTime;
 
     private String acceptUserId;
 
-    private Date requestDateTime;
+    private Date acceptDateTime;
 
     private String requestMsg;
 

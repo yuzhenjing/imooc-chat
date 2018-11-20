@@ -102,8 +102,9 @@
 								// 关闭等待框
 								plus.nativeUI.closeWaiting();
 								
-								if (data.status == 200) {
+								if (data.code == 'SUCCESS') {
 									var userInfo = data.data;
+									console.log('上传后用户...',userInfo)
 									app.setUserGlobalInfo(userInfo);
 									
 									// 触发另外一个webview的自定义事件，可以使用 mui.fire()

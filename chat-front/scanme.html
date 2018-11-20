@@ -67,7 +67,7 @@
 						var user = app.getUserGlobalInfo();
 						
 						plus.nativeUI.showWaiting("请稍后...");
-						mui.ajax(app.serverUrl + "/u/search?myUserId=" + user.id +
+						mui.ajax(app.serverUrl + "/user/searchFrends?myUserId=" + user.id +
 										"&friendUsername=" + friendUsername, {
 							data:{},
 							dataType:'json',//服务器返回json格式数据
@@ -78,7 +78,7 @@
 								//服务器返回响应
 								plus.nativeUI.closeWaiting();
 								
-								if (data.status == 200) {
+								if (data.code == 'SUCCESS') {
 									
 									mui.openWindow({
 										url: "searchFriendsResult.html",

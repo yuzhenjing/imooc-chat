@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 
 @Component
@@ -19,20 +21,15 @@ public class FastDFSClient {
     @Autowired
     private FastFileStorageClient storageClient;
 
-//	@Autowired
-//	private AppConfig appConfig; // 项目参数配置
 
     /**
-     * 上传文件
-     *
-     * @param file 文件对象
-     * @return 文件访问地址
+     * @param filePath
+     * @return
      * @throws IOException
      */
-    public String uploadFile(MultipartFile file) throws IOException {
-        StorePath storePath = storageClient.uploadFile(file.getInputStream(), file.getSize(),
-                FilenameUtils.getExtension(file.getOriginalFilename()), null);
-
+    public String uploadFile(String filePath) throws IOException {
+        final FileInputStream inputStream = new FileInputStream(filePath);
+        StorePath storePath = storageClient.uploadFile(inputStream, inputStream.available(), "png", null);
         return storePath.getPath();
     }
 
@@ -58,9 +55,14 @@ public class FastDFSClient {
     }
 
     public String uploadBase64(MultipartFile file) throws IOException {
-        StorePath storePath = storageClient.uploadImageAndCrtThumbImage(file.getInputStream(), file.getSize(),
-                "png", null);
+        StorePath storePath = storageClient.uploadImageAndCrtThumbImage(file.getInputStream(), file.getSize(), "png", null);
 
+        return storePath.getPath();
+    }
+
+    public String uploadBase64(byte[] bytes) throws IOException {
+        InputStream input = new ByteArrayInputStream(bytes);
+        StorePath storePath = storageClient.uploadImageAndCrtThumbImage(input, bytes.length, "png", null);
         return storePath.getPath();
     }
 

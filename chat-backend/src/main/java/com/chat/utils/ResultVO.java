@@ -16,7 +16,7 @@ public class ResultVO<T> {
 
     private String msg;
 
-    private T date;
+    private T data;
 
     public static ResultVO ok() {
         return new ResultVO<>("SUCCESS", "成功", null);

@@ -29,6 +29,7 @@ public class QRCodeUtil {
     // LOGO高度
     private static final int LOGO_HEIGHT = 60;
 
+
     private static BufferedImage createImage(String content, String logoPath, boolean needCompress) throws Exception {
         Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
@@ -47,7 +48,7 @@ public class QRCodeUtil {
             return image;
         }
         //插入logo
-        QRCodeUtil.insertImage(image, logoPath, needCompress);
+        QRCodeUtil.insertLogo(image, logoPath, needCompress);
         return image;
     }
 
@@ -59,7 +60,7 @@ public class QRCodeUtil {
      * @param needCompress 是否压缩
      * @throws Exception
      */
-    private static void insertImage(BufferedImage source, String logoPath, boolean needCompress) throws Exception {
+    private static void insertLogo(BufferedImage source, String logoPath, boolean needCompress) throws Exception {
         File file = new File(logoPath);
         if (!file.exists()) {
             throw new Exception("logo file not found.");
@@ -77,7 +78,7 @@ public class QRCodeUtil {
             Image image = src.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
             Graphics g = tag.getGraphics();
-            g.drawImage(image, 0, 0, null); // 绘制缩小后的图
+            g.drawImage(image, 0, 0, null);
             g.dispose();
             src = image;
         }
@@ -110,25 +111,6 @@ public class QRCodeUtil {
         return fileName;
     }
 
-    /**
-     * 生成二维码(内嵌LOGO)
-     * 调用者指定二维码文件名
-     *
-     * @param content      内容
-     * @param logoPath     LOGO地址
-     * @param destPath     存放目录
-     * @param fileName     二维码文件名
-     * @param needCompress 是否压缩LOGO
-     * @throws Exception
-     */
-    public static String encode(String content, String logoPath, String destPath, String fileName, boolean needCompress) throws Exception {
-        BufferedImage image = QRCodeUtil.createImage(content, logoPath, needCompress);
-        mkdirs(destPath);
-        fileName = fileName.substring(0, fileName.indexOf(".") > 0 ? fileName.indexOf(".") : fileName.length())
-                + "." + FORMAT.toLowerCase();
-        ImageIO.write(image, FORMAT, new File(destPath + "/" + fileName));
-        return fileName;
-    }
 
     /**
      * 当文件夹不存在时，mkdirs会自动创建多层目录，区别于mkdir．
@@ -236,15 +218,5 @@ public class QRCodeUtil {
      */
     public static String decode(String path) throws Exception {
         return QRCodeUtil.decode(new File(path));
-    }
-
-    public static void main(String[] args) throws Exception {
-        String text = "http://localhost:8083/communication/distribution?qrid=54999";
-        //不含Logo
-        //QRCodeUtil.encode(text, null, "e:\\", true);
-        //含Logo，不指定二维码图片名
-        //QRCodeUtil.encode(text, "e:\\csdn.jpg", "e:\\", true);
-        //含Logo，指定二维码图片名
-        QRCodeUtil.encode(text,null, "d:/", true);
     }
 }

@@ -52,8 +52,17 @@ public interface UserService {
 
     /**
      * 更新用户信息
+     *
      * @param user
      * @return
      */
     ChatUser updateUserInfo(ChatUser user);
+
+    /**
+     * 根据用户ID查询用户
+     *
+     * @param userId
+     * @return
+     */
+    ChatUser findUserByUserId(String userId);
 }

@@ -1,8 +1,9 @@
-package com.chat.service;
+package com.chat.service.impl;
 
 import com.chat.mapper.ChatUserMapper;
 import com.chat.netty.ChatMsg;
 import com.chat.pojo.ChatUser;
+import com.chat.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +50,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ChatUser updateUserInfo(ChatUser user) {
+        userMapper.updateByPrimaryKeySelective(user);
+        return userMapper.selectByPrimaryKey(user.getId());
+    }
 
-        return null;
+    @Override
+    public ChatUser findUserByUserId(String userId) {
+        return userMapper.selectByPrimaryKey(userId);
     }
 }

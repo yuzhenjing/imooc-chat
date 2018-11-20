@@ -31,7 +31,7 @@ public class GlobalControllerAdvice {
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public ResultVO errorHandler(Exception ex) {
-        log.error("全局异常信息：{}", ex.toString());
+        log.error("全局异常信息：{}", ex);
         return new ResultVO("SYSTEM_ERROR", ex.getMessage());
     }
 

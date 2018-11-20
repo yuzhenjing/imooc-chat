@@ -1,5 +1,6 @@
 package com.chat.utils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.multipart.MultipartFile;
@@ -143,5 +144,16 @@ public class FileUtils {
         // 使用apache提供的工具类操作流
         org.apache.commons.io.FileUtils.writeByteArrayToFile(new File(filePath), bs);
         return true;
+    }
+
+
+    public static byte[] stringTobase64(String base64Data) throws Exception {
+        if (StringUtils.isNotEmpty(base64Data)) {
+            String[] d = base64Data.split("base64,");
+            if (d != null && d.length == 2) {
+                return Base64Utils.decodeFromString(d[1]);
+            }
+        }
+        return null;
     }
 }
