@@ -2,6 +2,8 @@ package com.chat.mapper;
 
 import com.chat.pojo.ChatMsg;
 
+import java.util.List;
+
 public interface ChatMsgMapper {
     int deleteByPrimaryKey(String id);
 
@@ -14,4 +16,12 @@ public interface ChatMsgMapper {
     int updateByPrimaryKeySelective(ChatMsg record);
 
     int updateByPrimaryKey(ChatMsg record);
+
+    /**
+     * 查询未读消息
+     *
+     * @param acceptUserId
+     * @return
+     */
+    List<ChatMsg> findChatMsgByUnread(String acceptUserId);
 }

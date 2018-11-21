@@ -65,7 +65,7 @@
 						var friendUsername = content[1];
 						
 						var user = app.getUserGlobalInfo();
-						
+						console.log("扫码获取用户。。。",JSON.stringify(user))
 						plus.nativeUI.showWaiting("请稍后...");
 						mui.ajax(app.serverUrl + "/user/searchFrends?myUserId=" + user.id +
 										"&friendUsername=" + friendUsername, {

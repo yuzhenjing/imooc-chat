@@ -2,7 +2,10 @@ package com.chat.controller;
 
 import com.chat.bo.UsersBO;
 import com.chat.form.ChatUserForm;
+import com.chat.pojo.ChatMsg;
 import com.chat.pojo.ChatUser;
+import com.chat.pojo.MyFriends;
+import com.chat.service.ChatMsgService;
 import com.chat.service.FriendsRequestService;
 import com.chat.service.MyFriendsService;
 import com.chat.service.UserService;
@@ -11,6 +14,7 @@ import com.chat.utils.FileUtils;
 import com.chat.utils.QRCodeUtil;
 import com.chat.utils.ResultVO;
 import com.chat.utils.idworker.Sid;
+import com.chat.vo.MyFriendsVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author yzz
@@ -43,6 +48,8 @@ public class UserController {
 
     @Autowired
     private FriendsRequestService friendsRequestService;
+    @Autowired
+    private ChatMsgService chatMsgService;
 
 
     @PostMapping("/register")
@@ -115,6 +122,20 @@ public class UserController {
         ResultVO<ChatUser> friendUser = searchFrends(myUserId, friendUsername);
         friendsRequestService.addFriends(myUserId, friendUser.getData().getId());
         return ResultVO.ok();
+    }
+
+    @PostMapping("/getUnReadMsgList")
+    public ResultVO<List<ChatMsg>> getUnReadMsgList(String acceptUserId) throws Exception {
+        final List<ChatMsg> chatMsgs = chatMsgService.findChatMsgByUnread(acceptUserId);
+       log.info("chatMsgs:{}",chatMsgs);
+        return ResultVO.build(chatMsgs);
+    }
+
+    @PostMapping("/myFriends")
+    public ResultVO<List<MyFriendsVO>> myFriends(String userId) throws Exception {
+        final List<MyFriendsVO> friends = myFriendsService.queryMyfriends(userId);
+       log.info("friends:{}",friends);
+        return ResultVO.build(friends);
     }
 
 

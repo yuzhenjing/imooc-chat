@@ -22,6 +22,18 @@
       select count(id) from my_friends
       where my_user_id=#{myId} and  friends_id=#{friendId}
     </select>
+    <select id="queryMyfriends" resultType="com.chat.vo.MyFriendsVO">
+      SELECT
+        mf.friends_id as friendUserId,
+        cu.nick_name as friendNickname,
+        cu.face_image as friendFaceImage,
+        cu.username as friendUsername
+    FROM
+        `my_friends` mf
+        LEFT JOIN chat_user cu ON mf.friends_id = cu.id
+    WHERE
+  	  mf.my_user_id =#{userId}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from my_friends
     where id = #{id,jdbcType=VARCHAR}

@@ -104,7 +104,7 @@
 								
 								if (data.code == 'SUCCESS') {
 									var userInfo = data.data;
-									console.log('上传后用户...',userInfo)
+									console.log("上传图片后的用户信息",JSON.stringify(userInfo));
 									app.setUserGlobalInfo(userInfo);
 									
 									// 触发另外一个webview的自定义事件，可以使用 mui.fire()

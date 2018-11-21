@@ -20,7 +20,15 @@
     from chat_msg
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <select id="findChatMsgByUnread" resultType="com.chat.pojo.ChatMsg">
+
+      select
+      <include refid="Base_Column_List" />
+      from chat_msg
+      where accept_user_id = #{acceptUserId}
+      and sign_flag = false
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from chat_msg
     where id = #{id,jdbcType=VARCHAR}
   </delete>

@@ -2,9 +2,6 @@ package com.chat.netty;
 
 import java.io.Serializable;
 
-/**
- * 聊天信息
- */
 public class ChatMsg implements Serializable {
 
 	private static final long serialVersionUID = 3611169682695799175L;

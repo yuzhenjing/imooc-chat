@@ -14,10 +14,15 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class NettyBooter implements ApplicationListener<ContextRefreshedEvent> {
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        if (event.getApplicationContext() == null)
-            log.info("netty 启动了....");
-            WSServer.getInstance().start();
+        if (event.getApplicationContext().getParent() == null) {
+            try {
+                WSServer.getInstance().start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
